@@ -10,30 +10,32 @@ package enigma;
  * @author Felipe Costa Tebar & Miguel Angel Picazo Fernandez
  */
 public class MediatorRotor {
+
     int clavija;
     int sizeAlfabeto;
     Rotor nextRotor;
-    
-    
-    public MediatorRotor(Rotor r,int clavija,int sizeAlfabeto){
+
+    public MediatorRotor(Rotor r, int clavija, int sizeAlfabeto) {
         nextRotor = r;
-        this.clavija=clavija;
-        this.sizeAlfabeto=sizeAlfabeto;
+        this.clavija = clavija;
+        this.sizeAlfabeto = sizeAlfabeto;
     }
+
     //Gira el rotor actual
-    public boolean giro(){
+    public boolean giro() {
         this.clavija++;
         return this.advaseGiro();
     }
-    
+
     // Permite avisar al siguiente rotor cuando debe girar
-    private boolean advaseGiro(){
+    private boolean advaseGiro() {
         boolean result = false;
-        if(this.clavija % this.sizeAlfabeto == 0){
-            this.clavija=0;
+        if (this.clavija % this.sizeAlfabeto == 0) {
+            this.clavija = 0;
             result = true;
-            if(null != nextRotor)
+            if (null != nextRotor) {
                 nextRotor.girar();
+            }
         }
         return result;
     }

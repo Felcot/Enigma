@@ -11,41 +11,42 @@ import java.util.Queue;
  * @author Felman
  * @author Felipe Costa Tebar & Miguel Angel Picazo Fernandez
  */
-public class Rotor{
+public class Rotor {
+
     Alfabeto interna;
     Alfabeto externa;
     MediatorRotor mediador;
-    
-    public Rotor(Alfabeto interna,Alfabeto externa){
-        this.interna=interna;
-        this.externa=externa;
+
+    public Rotor(Alfabeto interna, Alfabeto externa) {
+        this.interna = interna;
+        this.externa = externa;
     }
-    
-    public Rotor(Alfabeto interna,Alfabeto externa,char clave,Rotor r){
-        this(interna,externa);
-        this.mediador= new MediatorRotor(r,this.externa.posicion(clave+""),this.externa.size());
-        
+
+    public Rotor(Alfabeto interna, Alfabeto externa, char clave, Rotor r) {
+        this(interna, externa);
+        this.mediador = new MediatorRotor(r, this.externa.posicion(clave + ""), this.externa.size());
+
     }
-    public void girar(){
+
+    public void girar() {
         boolean interGiro = this.interna.girar();
         boolean exterGiro = this.externa.girar();
-        if(interGiro && exterGiro)
+        if (interGiro && exterGiro) {
             mediador.giro();
-        else
-            if(interGiro)
-                this.interna.desHacerGiro();
-            else
-                this.externa.desHacerGiro();
+        } else if (interGiro) {
+            this.interna.desHacerGiro();
+        } else {
+            this.externa.desHacerGiro();
+        }
     }
+
+   public int enlaceInternoExterno(int pos){
+       return this.externa.posicion(this.interna.getLetra(pos));
+   }
     
-    public String enlaceIntExt(String character){
-        return this.externa.getLetra(this.interna.posicion(character));
+    public String toString() {
+        return "int: " + this.interna.toString() + "\next: " + this.externa.toString();
     }
-    public String enlaceExtInt(String character){
-        return this.interna.getLetra(this.externa.posicion(character));
-    }
-    
-    public String toString(){
-        return "int: "+this.interna.toString() + "\next: "+this.externa.toString();
-    }
+
+
 }
