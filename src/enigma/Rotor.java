@@ -26,7 +26,8 @@ public class Rotor {
 
     public Rotor(String name,Alfabeto interna, Alfabeto externa, char clave,char clavija, Rotor r,Rotor a) {
         this(name,interna, externa);
-        this.mediador = new MediatorRotor(r,this.externa.posicion(clave + ""),this.externa.posicion(clavija+""), this.externa.size(),a);
+        
+        this.mediador = new MediatorRotor(r,this.externa.posicion((clave + "").toUpperCase()),this.externa.posicion((clavija+"").toUpperCase()), this.externa.size(),a);
     }
     
     public Rotor(String name,Alfabeto interna, Alfabeto externa, char clave,char clavija, Rotor r,Rotor a,boolean rotorMedio) {
@@ -39,11 +40,7 @@ public class Rotor {
     }
     
     public void girar(){
-        if(this.rotorMedio && this.mediador.enClavija()){
-            this.mediador.giro();
-            this.girar();
-        }else
-            this.mediador.giro();
+        this.mediador.giro();
     }
 
    public String initEncrypt(String msg){

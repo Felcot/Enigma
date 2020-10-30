@@ -14,10 +14,12 @@ public class MediatorRotor {
     int offset;
     int clavija;
     int sizeAlfabeto;
+    boolean check;
     Rotor anterior;
     Rotor nextRotor;
     Reflector ref;
     public MediatorRotor(Rotor r, int offset,int clavija, int sizeAlfabeto,Rotor anterior) {
+        this.check = false;
         this.clavija = clavija;
         this.nextRotor = r;
         this.anterior = anterior;
@@ -31,13 +33,18 @@ public class MediatorRotor {
     //Gira el rotor actual
     public void giro() {
         this.offset=(this.offset + 1) % this.sizeAlfabeto;
-        if(this.offset == this.clavija){
+        
+        if(this.enClavija() || this.check){
             this.nextRotor.girar();
+            this.check =this.nextRotor != null && this.nextRotor.name.equals("rot2") && this.nextRotor.mediador.enClavija(true);
         }
-            
+        
+    }
+    public boolean enClavija(boolean check){
+        return check && this.clavija == this.offset + 1;
     }
     public boolean enClavija(){
-        return this.clavija == this.offset;
+        return this.clavija  == this.offset;
     }
     public int getOffset(){
         return this.offset;

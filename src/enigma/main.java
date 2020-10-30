@@ -22,8 +22,8 @@ public class main {
         clavija[2] = 'R'; // Rotor 1
         
         char[] clave = new char[3];
-        clave[0] = 'Z'; // Rotor 3
-        clave[1] = 'A'; // Rotor 2
+        clave[0] = 'V'; // Rotor 3
+        clave[1] = 'D'; // Rotor 2
         clave[2] = 'A'; // Rotor 1
         
         Enigma maquina = new Enigma(abc, r3, r2, r1, clave,clavija, "B");

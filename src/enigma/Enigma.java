@@ -29,6 +29,7 @@ public class Enigma {
 
     public String encrypt(String character) {
         System.out.println(rot3.initEncrypt(character));
+        System.out.println("C:"+this.rot3.mediador.clavija+" O:"+this.rot3.mediador.offset);
         
         return "";
     }
