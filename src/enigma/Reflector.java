@@ -16,8 +16,9 @@ import java.util.Map;
 public class Reflector {
 
     Alfabeto reflector;
-
-    public Reflector(String ref) {
+    Alfabeto abc;
+    
+    public Reflector(String ref,Alfabeto abc) {
         Map<String, String> dic = new HashMap<String, String>();
         dic.put("A", "EJMZALYXVBWFCRQUONTSPIKHGD");
         dic.put("B", "YRUHQSLDPXNGOKMIEBFZCWVJAT");
@@ -28,9 +29,14 @@ public class Reflector {
         //No encontrar el refector buscado.
         String result = dic.get(ref);
         result = result != null ? result : dic.get("B");
+        this.abc=abc;
         this.reflector = new Alfabeto(result);
     }
-    public String reflectar(int pos){
-        return this.reflector.getLetra(pos);
+    public String reflectar(String letra){
+        return this.abc.getLetra(this.reflector.posicion(letra));
+    }
+    
+    public String encrypt (String ida){
+        return this.reflector.getLetra(this.abc.posicion(ida));
     }
 }

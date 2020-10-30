@@ -17,22 +17,19 @@ public class Enigma {
     Rotor rot3;
     Reflector ref;
 
-    public Enigma(Alfabeto abc, Alfabeto r3, Alfabeto r2, Alfabeto r1, char[] clave, String reflector) {
+    public Enigma(Alfabeto abc, Alfabeto r3, Alfabeto r2, Alfabeto r1, char[] clave,char [] clavija, String reflector) {
         this.abc = abc;
-        this.rot1 = new Rotor(r1, abc, clave[2], null);
-        this.rot2 = new Rotor(r2, abc, clave[1], rot1);
-        this.rot3 = new Rotor(r3, abc, clave[0], rot2);
-        this.ref = new Reflector(reflector);
+        this.ref = new Reflector(reflector,abc);
+        this.rot1 = new Rotor("rot1",r1, abc, clave[2],clavija[2], ref,rot2);
+        this.rot2 = new Rotor("rot2",r2, abc, clave[1],clavija[1], rot1,rot3, true);
+        this.rot3 = new Rotor("rot3",r3, abc, clave[0],clavija[0], rot2,null);
+        this.rot1.mediador.anterior=rot2;
+        this.rot2.mediador.anterior=rot3;
     }
 
     public String encrypt(String character) {
-        rot3.girar();//Avanza 1 posicion
-        int result = rot3.enlaceInternoExterno(this.abc.posicion(character)-1);
-        result = rot2.enlaceInternoExterno(result);
-        String s = ref.reflectar(result);
-        System.out.println(s);
-        // Enlaza interna L Externa-> Numero
-        // Numero interno L Externo
+        System.out.println(rot3.initEncrypt(character));
+        
         return "";
     }
 

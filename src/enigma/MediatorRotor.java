@@ -11,32 +11,36 @@ package enigma;
  */
 public class MediatorRotor {
 
+    int offset;
     int clavija;
     int sizeAlfabeto;
+    Rotor anterior;
     Rotor nextRotor;
-
-    public MediatorRotor(Rotor r, int clavija, int sizeAlfabeto) {
-        nextRotor = r;
+    Reflector ref;
+    public MediatorRotor(Rotor r, int offset,int clavija, int sizeAlfabeto,Rotor anterior) {
         this.clavija = clavija;
+        this.nextRotor = r;
+        this.anterior = anterior;
+        this.offset = offset;
         this.sizeAlfabeto = sizeAlfabeto;
     }
-
+    public MediatorRotor(Rotor anterior,Reflector r, int offset,int clavija, int sizeAlfabeto) {
+        this(null,offset,clavija,sizeAlfabeto,anterior);
+        this.ref= r;
+    }
     //Gira el rotor actual
-    public boolean giro() {
-        this.clavija++;
-        return this.advaseGiro();
-    }
-
-    // Permite avisar al siguiente rotor cuando debe girar
-    private boolean advaseGiro() {
-        boolean result = false;
-        if (this.clavija % this.sizeAlfabeto == 0) {
-            this.clavija = 0;
-            result = true;
-            if (null != nextRotor) {
-                nextRotor.girar();
-            }
+    public void giro() {
+        this.offset=(this.offset + 1) % this.sizeAlfabeto;
+        if(this.offset == this.clavija){
+            this.nextRotor.girar();
         }
-        return result;
+            
     }
+    public boolean enClavija(){
+        return this.clavija == this.offset;
+    }
+    public int getOffset(){
+        return this.offset;
+    }
+    
 }

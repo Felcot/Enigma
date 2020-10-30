@@ -24,11 +24,16 @@ public class Alfabeto {
     }
 
     public int posicion(String character) {
-        return 1 + ((LinkedList<String>) letras).indexOf(character);
+        return ((LinkedList<String>) letras).indexOf(character);
     }
 
     public String getLetra(int posicion) {
-        return ((LinkedList<String>) letras).get(posicion);
+       
+        if(posicion < 0) {
+            posicion = this.size() + posicion;
+        }
+        
+            return ((LinkedList<String>) letras).get(posicion);
     }
 
     public int size() {
