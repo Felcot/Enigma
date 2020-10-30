@@ -26,7 +26,13 @@ public class main {
         clave[1] = 'D'; // Rotor 2
         clave[2] = 'A'; // Rotor 1
         
-        Enigma maquina = new Enigma(abc, r3, r2, r1, clave,clavija, "B");
-        maquina.encrypt("Hola mundo Enigma ha sido resuelto");
+        Enigma encryptadora = new Enigma(abc, r3, r2, r1, clave,clavija, "B");
+        
+        System.out.println("Encriptar:");
+        encryptadora.encrypt("Hola mundo enigma ha sido resuelto");
+        
+        System.out.println("Resolver:");
+        Enigma resolver = new Enigma(abc, r3, r2, r1, clave,clavija, "B");
+        resolver.encrypt("LVXMYDVQLEKZRSZAGJWQVGGSSQAHNQMWKC");
     }
 }
