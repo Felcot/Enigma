@@ -9,12 +9,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
- * @author felip
+ * @author Felman
+ * @author Felipe Costa Tebar & Miguel Angel Picazo Fernandez
  */
 public class Replacement {
-    private Map<String,String> changer = new HashMap();
-    
+    private Map<String,String> changer;
+    public Replacement (){
+        this.changer = new HashMap();
+    }
+    public Replacement(char [] changer){
+        this();
+        this.changer.put(changer[0]+"",""+changer[1]);
+        this.changer.put(changer[1]+"",""+changer[0]);
+        
+    }
     public void addChanger(String a,String b){
         this.changer.put(a, b);
         this.changer.put(b, a);

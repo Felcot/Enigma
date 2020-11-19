@@ -10,7 +10,6 @@ package enigma;
  * @author Felipe Costa Tebar & Miguel Angel Picazo Fernandez
  */
 public class MediatorRotor {
-
     int offset;
     int clavija;
     int sizeAlfabeto;
@@ -34,7 +33,7 @@ public class MediatorRotor {
     public void giro() {
         this.offset=(this.offset + 1) % this.sizeAlfabeto;
         
-        if(this.enClavija() || this.check){
+        if(this.nextRotor != null&& this.enClavija() || this.check){
             this.nextRotor.girar();
             this.check =this.nextRotor != null && this.nextRotor.name.equals("rot2") && this.nextRotor.mediador.enClavija(true);
         }

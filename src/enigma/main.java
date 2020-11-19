@@ -12,6 +12,7 @@ package enigma;
 public class main {
 
     public static void main(String[] args) {
+        System.out.println("HOLA MUNDO CREA MUCHO AMOR".replaceAll("A","\u001B[31mA\u001B[0m"));
         Alfabeto abc = new Alfabeto("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         Alfabeto r3 = new Alfabeto("BDFHJLCPRTXVZNYEIWGAKMUSQO");
         Alfabeto r2 = new Alfabeto("AJDKSIRUXBLHWTMCQGZNPYFVOE");
@@ -22,21 +23,19 @@ public class main {
         clavija[2] = 'R'; // Rotor 1
         
         char[] clave = new char[3];
-        clave[0] = 'V'; // Rotor 3
-        clave[1] = 'D'; // Rotor 2
-        clave[2] = 'A'; // Rotor 1
+        clave[0] = 'G'; // Rotor 3
+        clave[1] = 'C'; // Rotor 2
+        clave[2] = 'F'; // Rotor 1
         Replacement changer =  new Replacement();
-        changer.addChanger("A", "B");
-        changer.addChanger("C", "D");
-        changer.addChanger("E", "F");
+        changer.addChanger("A", "E");
         
-        Enigma encryptadora = new Enigma(abc, r3, r2, r1, clave,clavija, "CThin",changer);
+        Enigma encryptadora = new Enigma(abc, r3, r2, r1, clave,clavija, "B",changer);
         
         System.out.println("Encriptar:");
-        String result = encryptadora.encrypt("Hola mundo enigma ha sido resulto");
+        String result = encryptadora.encrypt("MSZXNXFPYDMHOVZWJZIRWULDGSDHUIPAERZLGOFFPBOVILGTIQJHUTNTSZCCBNCLLATPNLGIAJWJ");
         System.out.println(result);
         System.out.println("Resolver:");
-        Enigma resolver = new Enigma(abc, r3, r2, r1, clave,clavija, "CThin",changer);
+        Enigma resolver = new Enigma(abc, r3, r2, r1, clave,clavija, "B",changer);
         System.out.println(resolver.encrypt(result));
     }
 }

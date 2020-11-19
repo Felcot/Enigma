@@ -40,12 +40,12 @@ public class Rotor {
     }
     
     public void girar(){
-        this.mediador.giro();
+            this.mediador.giro();
     }
 
    public String initEncrypt(String msg){
        String result = "";
-       System.out.println(msg);
+       //System.out.println(msg);
         for(char c : msg.toCharArray()){
             if(c != ' ')
                 result += this.encrypt(c+"");
