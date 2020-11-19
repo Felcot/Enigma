@@ -25,14 +25,18 @@ public class main {
         clave[0] = 'V'; // Rotor 3
         clave[1] = 'D'; // Rotor 2
         clave[2] = 'A'; // Rotor 1
+        Replacement changer =  new Replacement();
+        changer.addChanger("A", "B");
+        changer.addChanger("C", "D");
+        changer.addChanger("E", "F");
         
-        Enigma encryptadora = new Enigma(abc, r3, r2, r1, clave,clavija, "B");
+        Enigma encryptadora = new Enigma(abc, r3, r2, r1, clave,clavija, "CThin",changer);
         
         System.out.println("Encriptar:");
-        encryptadora.encrypt("Hola mundo enigma ha sido resuelto");
-        
+        String result = encryptadora.encrypt("Hola mundo enigma ha sido resulto");
+        System.out.println(result);
         System.out.println("Resolver:");
-        Enigma resolver = new Enigma(abc, r3, r2, r1, clave,clavija, "B");
-        resolver.encrypt("LVXMYDVQLEKZRSZAGJWQVGGSSQAHNQMWKC");
+        Enigma resolver = new Enigma(abc, r3, r2, r1, clave,clavija, "CThin",changer);
+        System.out.println(resolver.encrypt(result));
     }
 }

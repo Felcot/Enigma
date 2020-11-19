@@ -40,25 +40,11 @@ public class Alfabeto {
         return ((LinkedList<String>) letras).size();
     }
 
-    public boolean girar() {
-        return this.letras.add(this.letras.poll());
-    }
-
-    public boolean desHacerGiro() {
-        return this.desHacerGiro(0);
-    }
-
-    public boolean desHacerGiro(int check) {
-        if (check < 24) {
-            return this.girar() && this.desHacerGiro(check + 1);
-        }
-        return this.girar();
-    }
-
     @Override
     public String toString() {
         return toString(this.size() - 1);
     }
+    
 
     private String toString(int n) {
         if (n < 0) {

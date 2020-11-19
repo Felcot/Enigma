@@ -11,13 +11,15 @@ package enigma;
  */
 public class Enigma {
 
-    Alfabeto abc;
-    Rotor rot1;
-    Rotor rot2;
-    Rotor rot3;
-    Reflector ref;
+    private Alfabeto abc;
+    private Rotor rot1;
+    private Rotor rot2;
+    private Rotor rot3;
+    private Reflector ref;
+    private Replacement changers;
+     
 
-    public Enigma(Alfabeto abc, Alfabeto r3, Alfabeto r2, Alfabeto r1, char[] clave,char [] clavija, String reflector) {
+    public Enigma(Alfabeto abc, Alfabeto r3, Alfabeto r2, Alfabeto r1, char[] clave,char [] clavija, String reflector,Replacement changers) {
         this.abc = abc;
         this.ref = new Reflector(reflector,abc);
         this.rot1 = new Rotor("rot1",r1, abc, clave[2],clavija[2], ref,rot2);
@@ -25,11 +27,26 @@ public class Enigma {
         this.rot3 = new Rotor("rot3",r3, abc, clave[0],clavija[0], rot2,null);
         this.rot1.mediador.anterior=rot2;
         this.rot2.mediador.anterior=rot3;
+        this.changers =  changers;
     }
 
     public String encrypt(String character) {
-        System.out.println(rot3.initEncrypt(character));
-        return "";
+        return this.execChanger(rot3.initEncrypt(this.execChanger(character.toUpperCase())));
     }
-
+    
+    
+    private String execChanger(String character){
+        return !this.changers.isEmpty() ? this.canToexecChanger(character): character;
+    }
+    
+    private String canToexecChanger(String character){
+        String result = "";
+            for(char c:character.toCharArray())
+                result += this.executeChanger(c);
+        return result;
+    }
+    private String executeChanger(char c){
+        return changers.containsKey(c+"")? changers.getChagerValue(c+""):c+"";
+    }
+    
 }

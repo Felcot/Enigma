@@ -45,7 +45,6 @@ public class Rotor {
 
    public String initEncrypt(String msg){
        String result = "";
-       msg=msg.toUpperCase();
        System.out.println(msg);
         for(char c : msg.toCharArray()){
             if(c != ' ')
@@ -67,14 +66,14 @@ public class Rotor {
        else
            return this.encryptVuelta(this.mediador.ref.encrypt(this.encryptExtInt(letra)));
    }
+   
    public String encryptExtInt(String letra){
        int offset = this.mediador.getOffset();
        int size = this.externa.size();
-       String result = this.externa.getLetra((this.externa.posicion(this.interna.getLetra((this.externa.posicion(letra) + offset) % size))-offset)%size);
+       String result = this.externa.getLetra((this.externa.posicion(this.interna.getLetra(
+               (this.externa.posicion(letra) + offset) % size))-offset)%size);
        return result;
    }
-   
-   
    
    public String encryptVuelta(String letra){
        if(this.mediador.anterior != null)
@@ -86,7 +85,8 @@ public class Rotor {
    public String encryptIntExt(String letra){
        int offset = this.mediador.getOffset();
        int size = this.externa.size();
-       return this.externa.getLetra((this.externa.posicion(this.externa.getLetra(this.interna.posicion(this.externa.getLetra((this.externa.posicion(letra) + offset)% size)))) -offset)%size);
+       return this.externa.getLetra((this.externa.posicion(this.externa.getLetra(this.interna.posicion(
+                        this.externa.getLetra((this.externa.posicion(letra) + offset)% size)))) -offset)%size);
    }
     public String toString() {
         return "int: " + this.interna.toString() + "\next: " + this.externa.toString();
